@@ -45,26 +45,21 @@ clean:
 	@rm -rf $(BIN_DIR) 
 
 
-# Docker image settings
-DOCKER_IMAGE_NAME := mailsend-server
-DOCKERFILE_PATH := cmd/server/Dockerfile
-DOCKER_CONTEXT := .
+# Docker Compose targets
+.PHONY: docker-build docker-up docker-down docker-clean
 
-.PHONY: docker-build docker-run docker-clean
-
-# Build Docker image
 docker-build:
-	@echo "🐳 Building Docker image..."
-	@docker build -f $(DOCKERFILE_PATH) -t $(DOCKER_IMAGE_NAME) $(DOCKER_CONTEXT)
+	@echo "🐳 Building Docker image with Compose..."
+	@docker compose build
 
-# Run Docker container
-docker-run:
-	@echo "🚀 Running Docker container..."
-	@docker run --rm -it -p 8080:8080 \
-		-v $(PWD)/runtime:/root/runtime \
-		$(DOCKER_IMAGE_NAME)
+docker-up:
+	@echo "🚀 Starting services with Compose..."
+	@docker compose up
 
-# Remove Docker image
-docker-clean:
-	@echo "🧹 Removing Docker image..."
-	@docker rmi $(DOCKER_IMAGE_NAME) || true
+docker-down:
+	@echo "🛑 Stopping services with Compose..."
+	@docker compose down
+
+docker-clean: docker-down
+	@echo "🧹 Removing built Docker image..."
+	@docker rmi mailsend-server || true
