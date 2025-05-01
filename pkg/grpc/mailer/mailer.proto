@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package mailer;
+option go_package = "pkg/grpc/mailer";
+
+service MailService { rpc SendMail(MailRequest) returns (MailReply); }
+
+message MailRequest {
+  string api_key = 1;
+  string receiver = 2;
+  string subject = 3;
+  string body = 4;
+}
+
+message MailReply { string status = 1; }
