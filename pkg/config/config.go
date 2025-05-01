@@ -7,6 +7,7 @@ import (
 
 // Config structure matches the TOML layout
 type Config struct {
+	ApiKey   string   `toml:"api_key"`
 	Sender   Sender   `toml:"Sender"`
 	Receiver Receiver `toml:"Receiver"`
 }
@@ -15,6 +16,7 @@ type Sender struct {
 	Account    string `toml:"account"`
 	Password   string `toml:"password"`
 	SMTPServer string `toml:"smtp_server"`
+	Port       string `toml:"port"`
 }
 
 type Receiver struct {
@@ -37,7 +39,7 @@ func LoadConfig(path string) (*Config, error) {
 	return &cfg, nil
 }
 
-var DefaultFile = "runtime/conf.toml"
+var DefaultFile = "runtime/config.toml"
 
 func LoadDefaultConfig() (*Config, error) {
 	return LoadConfig(DefaultFile)

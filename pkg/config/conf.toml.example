@@ -1,8 +1,10 @@
 [Sender]
 account = "xxx@xx.edu.cn"
-# The password is generated inside the App, NOT your own Password
-password = "xxxxxx"
+password = "xxxxxx" # The password is generated inside the App, NOT your own Password
 smtp_server = "smtp.xxx.edu.cn"
+port = "587" # Use 465 for SSL, 587 for TLS
 
 [Receiver]
 account = "xxxx@u.nus.edu"
+
+api_key = "zzxxxzz"
