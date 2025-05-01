@@ -1,0 +1,7 @@
+[Sender]
+account = "xxx@xx.edu.cn"
+password = "xxxxxx"
+smtp_server = "smtp.xxx.edu.cn"
+
+[Receiver]
+account = "xxxx@u.nus.edu"
