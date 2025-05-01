@@ -1,7 +1,7 @@
 package main
 
 import (
-	// "crypto/tls"
+	"crypto/tls"
 	"mailsend/pkg/config"
 	"mailsend/pkg/log"
 	"net/smtp"
@@ -28,13 +28,13 @@ func main() {
 	e.Subject = "Test Email from Go (TLS)"
 	e.Text = []byte("Hello,\n\nThis is a test email sent using Go with TLS.\n\nRegards,\nGo App")
 
-	err = e.Send(
+	err = e.SendWithStartTLS(
 		c.Sender.SMTPServer+":587",
 		smtp.PlainAuth("", c.Sender.Account, c.Sender.Password, c.Sender.SMTPServer),
-		// &tls.Config{
-		// 	InsecureSkipVerify: true,
-		// 	ServerName:         c.Sender.SMTPServer,
-		// },
+		&tls.Config{
+			InsecureSkipVerify: true,
+			ServerName:         c.Sender.SMTPServer,
+		},
 	)
 
 	if err != nil {
