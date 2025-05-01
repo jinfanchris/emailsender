@@ -1,0 +1,9 @@
+services:
+  server:
+    build:
+      context: .
+      dockerfile: cmd/server/Dockerfile
+    volumes:
+      - ./runtime:/root/runtime
+    ports:
+      - "52333:52333"

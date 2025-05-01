@@ -13,6 +13,8 @@ import (
 	"google.golang.org/grpc/credentials"
 )
 
+var Port = "52333"
+
 func main() {
 	a := ParseArgs()
 
@@ -48,14 +50,13 @@ func main() {
 
 	pb.RegisterMailServiceServer(grpcServer, mailServer)
 
-	lis, err := net.Listen("tcp", ":"+a.Port)
+	lis, err := net.Listen("tcp", ":"+Port)
 	if err != nil {
 		logrus.Panic(err)
 	}
 
-	logrus.Infof("Listening on port %s", a.Port)
+	logrus.Infof("Listening on port %s", Port)
 	if err := grpcServer.Serve(lis); err != nil {
 		logrus.Panic(err)
 	}
 }
-

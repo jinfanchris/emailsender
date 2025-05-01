@@ -43,3 +43,28 @@ generate-cert: $(CERT_CONF) $(CERT_GEN)
 clean:
 	@echo "🧹 Cleaning build artifacts..."
 	@rm -rf $(BIN_DIR) 
+
+
+# Docker image settings
+DOCKER_IMAGE_NAME := mailsend-server
+DOCKERFILE_PATH := cmd/server/Dockerfile
+DOCKER_CONTEXT := .
+
+.PHONY: docker-build docker-run docker-clean
+
+# Build Docker image
+docker-build:
+	@echo "🐳 Building Docker image..."
+	@docker build -f $(DOCKERFILE_PATH) -t $(DOCKER_IMAGE_NAME) $(DOCKER_CONTEXT)
+
+# Run Docker container
+docker-run:
+	@echo "🚀 Running Docker container..."
+	@docker run --rm -it -p 8080:8080 \
+		-v $(PWD)/runtime:/root/runtime \
+		$(DOCKER_IMAGE_NAME)
+
+# Remove Docker image
+docker-clean:
+	@echo "🧹 Removing Docker image..."
+	@docker rmi $(DOCKER_IMAGE_NAME) || true
