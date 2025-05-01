@@ -1,5 +1,6 @@
 [Sender]
 account = "xxx@xx.edu.cn"
+# The password is generated inside the App, NOT your own Password
 password = "xxxxxx"
 smtp_server = "smtp.xxx.edu.cn"
 
