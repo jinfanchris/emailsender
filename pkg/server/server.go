@@ -48,16 +48,20 @@ func (s *Server) SendMail(ctx context.Context, req *pb.MailRequest) (resp *pb.Ma
 
 	if apiKey != s.apiKey {
 		err = ErrInvalidAPI
+		logrus.Errorf("Invalid API key: %s v.s. %s", apiKey, s.apiKey)
 		return
 	}
 
 	if err = sendMail(s.smtp.Account, rcv, sub, bdy, s.smtp.Server, s.smtp.Port, s.smtp.Password); err != nil {
+		logrus.Errorf("Failed to send mail: %v", err)
 		return
 	}
 
 	resp = &pb.MailReply{
 		Status: "OK",
 	}
+
+	logrus.Infof("Mail sent successfully to %s", rcv)
 
 	return
 }

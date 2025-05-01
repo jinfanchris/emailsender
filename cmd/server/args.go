@@ -21,5 +21,6 @@ func ParseArgs() Args {
 	pflag.StringVarP(&args.KeyF, "key", "K", "runtime/key.pem", "Path to TLS key")
 	pflag.StringVarP(&args.Port, "port", "p", "52333", "Port to listen on")
 
+	pflag.Parse()
 	return args
 }

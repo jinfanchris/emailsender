@@ -21,6 +21,6 @@ func ParseArgs() Args {
 	pflag.StringVarP(&args.CertF, "cert", "C", "runtime/cert.pem", "Path to TLS certificate")
 	pflag.StringVarP(&args.Port, "port", "p", "52333", "Port to listen on")
 	pflag.StringVarP(&args.Host, "host", "H", "localhost", "Host")
-
+	pflag.Parse()
 	return args
 }
