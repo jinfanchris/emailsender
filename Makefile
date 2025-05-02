@@ -56,6 +56,10 @@ docker-up:
 	@echo "🚀 Starting services with Compose..."
 	@docker compose up
 
+docker-up-d:
+	@echo "🚀 Starting services with Compose..."
+	@docker compose up -d
+
 docker-down:
 	@echo "🛑 Stopping services with Compose..."
 	@docker compose down

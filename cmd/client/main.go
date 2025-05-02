@@ -33,7 +33,7 @@ func main() {
 	err = cl.SendEmail(
 		c.Receiver.Account,
 		"hhhhhhhhhh",
-		"Test for fun",
+		"Test for fun - from lab",
 	)
 
 	if err != nil {

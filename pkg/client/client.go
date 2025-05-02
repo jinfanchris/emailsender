@@ -57,7 +57,7 @@ func NewClient(serverAddr, apiKey, certF, serverName string) (c *Client, err err
 }
 
 func (c *Client) SendEmail(to, subject, body string) error {
-	ctx, cancel := context.WithTimeout(context.Background(), 4*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 100*time.Second)
 	defer cancel()
 
 	req := &pb.MailRequest{
