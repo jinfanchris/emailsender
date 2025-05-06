@@ -1,4 +1,4 @@
-module mailsend
+module github.com/jinfanchris/mailsend
 
 go 1.24.2
 
