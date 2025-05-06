@@ -12,6 +12,8 @@ COPY . .
 
 # Build the server binary
 RUN go build -o /app/bin/server ./cmd/server
+RUN go build -o /app/bin/client ./cmd/client
+RUN go build -o /app/bin/example ./cmd/example
 
 # Final minimal image
 FROM alpine:latest
@@ -21,6 +23,8 @@ WORKDIR /root/
 # Copy runtime files if needed
 COPY runtime /root/runtime
 COPY --from=builder /app/bin/server .
+COPY --from=builder /app/bin/client .
+COPY --from=builder /app/bin/example .
 
 EXPOSE 52333
 

@@ -1,2 +1,5 @@
 runtime
 bin
+cmd/server/.Dockerfile.un~
+.Makefile.un~
+.docker-compose.yml.un~
