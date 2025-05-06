@@ -1,12 +1,12 @@
 package main
 
 import (
-	"crypto/tls"
+	"fmt"
 	"mailsend/pkg/config"
+	"mailsend/pkg/emailer"
 	"mailsend/pkg/log"
-	"net/smtp"
+	"time"
 
-	"github.com/jordan-wright/email"
 	"github.com/sirupsen/logrus"
 )
 
@@ -22,20 +22,27 @@ func main() {
 		logrus.Panic(err)
 	}
 
-	e := email.NewEmail()
-	e.From = c.Sender.Account
-	e.To = []string{c.Receiver.Account}
-	e.Subject = "Test Email from Go (TLS)"
-	e.Text = []byte("Hello,\n\nThis is a test email sent using Go with TLS.\n\nRegards,\nGo App")
+	emailer := emailer.NewEmailer(c)
 
-	err = e.SendWithStartTLS(
-		c.Sender.SMTPServer+":587",
-		smtp.PlainAuth("", c.Sender.Account, c.Sender.Password, c.Sender.SMTPServer),
-		&tls.Config{
-			InsecureSkipVerify: true,
-			ServerName:         c.Sender.SMTPServer,
-		},
-	)
+	Subject := "Test Email from Go (TLS)"
+	Text := "Hello,\n\nThis is a test email sent using Go with TLS.\n\nRegards,\nGo App"
+
+	wait := make(chan error)
+	emailer.SendEmail(Subject, Text, wait)
+
+	tk := time.NewTicker(1 * time.Second)
+
+	err = func() error {
+		for {
+			select {
+			case <-tk.C:
+				fmt.Print(".")
+			case err := <-wait:
+				return err
+
+			}
+		}
+	}()
 
 	if err != nil {
 		logrus.Panic(err)
