@@ -4,6 +4,7 @@ go 1.24.2
 
 require (
 	github.com/BurntSushi/toml v1.5.0
+	github.com/google/uuid v1.6.0
 	github.com/jordan-wright/email v4.0.1-0.20210109023952-943e75fe5223+incompatible
 	github.com/rifflock/lfshook v0.0.0-20180920164130-b9218ef580f5
 	github.com/sirupsen/logrus v1.9.3

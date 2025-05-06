@@ -1,4 +1,4 @@
-package client
+package service
 
 import (
 	"crypto/tls"
@@ -57,7 +57,7 @@ func NewClient(serverAddr, apiKey, certF, serverName string) (c *Client, err err
 }
 
 func (c *Client) SendEmail(to, subject, body string) error {
-	ctx, cancel := context.WithTimeout(context.Background(), 100*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
 	req := &pb.MailRequest{
@@ -68,9 +68,35 @@ func (c *Client) SendEmail(to, subject, body string) error {
 	}
 
 	// Call the SendEmail method on the server
-	_, err := c.MailServiceClient.SendMail(ctx, req)
+	Uuid, err := c.MailServiceClient.SendMail(ctx, req)
 	if err != nil {
 		return err
+	}
+
+	u := Uuid.GetUuid()
+	logrus.Infof("Uuid: %s", u)
+	tk := time.NewTicker(1 * time.Second)
+	for range tk.C {
+		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+		defer cancel()
+		req := &pb.Uuid{Uuid: u}
+		s, err := c.MailServiceClient.State(ctx, req)
+		if err != nil {
+			return err
+		}
+		st := state(s.Status)
+		switch st {
+		case Failed:
+			logrus.Error(s.Info)
+			return fmt.Errorf("Error: %s", s.Info)
+		case Sending:
+			fmt.Print(".")
+			continue
+		case Sent:
+			logrus.Infof("Sent")
+			return nil
+		}
+
 	}
 
 	return nil

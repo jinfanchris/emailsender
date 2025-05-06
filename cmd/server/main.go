@@ -3,7 +3,7 @@ package main
 import (
 	"mailsend/pkg/config"
 	"mailsend/pkg/log"
-	"mailsend/pkg/server"
+	"mailsend/pkg/service"
 	"net"
 
 	pb "mailsend/pkg/grpc/mailer"
@@ -40,7 +40,7 @@ func main() {
 
 	grpcServer := grpc.NewServer(grpc.Creds(creds))
 
-	mailServer := server.NewServer(
+	mailServer := service.NewServer(
 		apiKey,
 		c.Sender.Account,
 		c.Sender.Password,

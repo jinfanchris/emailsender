@@ -1,9 +1,9 @@
 package main
 
 import (
-	"mailsend/pkg/client"
 	"mailsend/pkg/config"
 	"mailsend/pkg/log"
+	"mailsend/pkg/service"
 
 	"github.com/sirupsen/logrus"
 )
@@ -25,7 +25,7 @@ func main() {
 
 	// logrus.Infof("config: %#v", c)
 
-	cl, err := client.NewClient(a.Host+":"+a.Port, c.ApiKey, a.CertF, "hhost")
+	cl, err := service.NewClient(a.Host+":"+a.Port, c.ApiKey, a.CertF, "hhost")
 	if err != nil {
 		logrus.Panic(err)
 	}
