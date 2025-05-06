@@ -1,12 +1,12 @@
 package main
 
 import (
-	"mailsend/pkg/config"
-	"mailsend/pkg/log"
-	"mailsend/pkg/service"
+	"github.com/jinfanchris/mailsend/pkg/config"
+	"github.com/jinfanchris/mailsend/pkg/log"
+	"github.com/jinfanchris/mailsend/pkg/service"
 	"net"
 
-	pb "mailsend/pkg/grpc/mailer"
+	pb "github.com/jinfanchris/mailsend/pkg/grpc/mailer"
 
 	"github.com/sirupsen/logrus"
 	"google.golang.org/grpc"

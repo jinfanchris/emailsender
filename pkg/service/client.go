@@ -4,7 +4,7 @@ import (
 	"crypto/tls"
 	"crypto/x509"
 	"fmt"
-	pb "mailsend/pkg/grpc/mailer"
+	pb "github.com/jinfanchris/mailsend/pkg/grpc/mailer"
 	"os"
 
 	"context"

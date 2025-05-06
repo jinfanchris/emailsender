@@ -2,8 +2,8 @@ package emailer
 
 import (
 	"crypto/tls"
+	"github.com/jinfanchris/mailsend/pkg/config"
 	"github.com/jordan-wright/email"
-	"mailsend/pkg/config"
 	"net/smtp"
 )
 
