@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/jinfanchris/mailsend/pkg/config"
-	"github.com/jinfanchris/mailsend/pkg/emailer"
-	"github.com/jinfanchris/mailsend/pkg/log"
+	"github.com/jinfanchris/emailsender/pkg/config"
+	"github.com/jinfanchris/emailsender/pkg/emailer"
+	"github.com/jinfanchris/emailsender/pkg/log"
 	"time"
 
 	"github.com/sirupsen/logrus"

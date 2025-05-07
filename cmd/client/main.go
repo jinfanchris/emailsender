@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/jinfanchris/mailsend/pkg/config"
-	"github.com/jinfanchris/mailsend/pkg/log"
-	"github.com/jinfanchris/mailsend/pkg/service"
+	"github.com/jinfanchris/emailsender/pkg/config"
+	"github.com/jinfanchris/emailsender/pkg/log"
+	"github.com/jinfanchris/emailsender/pkg/service"
 
 	"github.com/sirupsen/logrus"
 )

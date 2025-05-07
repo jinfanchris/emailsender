@@ -1,8 +1,8 @@
-package mailsend
+package emailsender
 
 import (
-	"github.com/jinfanchris/mailsend/pkg/config"
-	"github.com/jinfanchris/mailsend/pkg/emailer"
+	"github.com/jinfanchris/emailsender/pkg/config"
+	"github.com/jinfanchris/emailsender/pkg/emailer"
 )
 
 func LoadConfig(fn string) (*config.Config, error) {

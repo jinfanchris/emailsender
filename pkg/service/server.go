@@ -4,7 +4,7 @@ import (
 	"context"
 	"crypto/tls"
 	"fmt"
-	pb "github.com/jinfanchris/mailsend/pkg/grpc/mailer"
+	pb "github.com/jinfanchris/emailsender/pkg/grpc/mailer"
 	"net/smtp"
 	"sync"
 
